@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import StudentList from './StudentList'
+import StudentReport from './StudentReport'
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       students: [],
+      selectedStudent : {}
     };
   }
 
@@ -31,15 +34,13 @@ export default class Main extends Component {
           <tbody>
             <tr>
               <th>Name</th>
+              <th>Tests</th>
             </tr>
-            {this.state.students.map(student => {
-              return (
-                <tr key={student.id}>
-                  <td>{student.fullName}</td>
-                </tr>
-              );
-            })}
+            <StudentList students = {this.state.students} />
           </tbody>
+        </table>
+        <table>
+          <StudentReport />
         </table>
       </div>
     );
