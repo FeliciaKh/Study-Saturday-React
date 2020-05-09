@@ -10,6 +10,8 @@ export default class Main extends Component {
       students: [],
       selectedStudent : {}
     };
+
+    this.getDetails = this.getDetails.bind(this)
   }
 
   componentDidMount() {
@@ -26,21 +28,28 @@ export default class Main extends Component {
     }
   }
 
+  getDetails (student) {
+    return this.setState({
+      selectedStudent: student
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Students</h1>
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th>Name</th>
               <th>Tests</th>
             </tr>
-            <StudentList students = {this.state.students} />
-          </tbody>
+          </thead>
+            <StudentList students = {this.state.students} getDetails ={this.getDetails} />
         </table>
+
         <table>
-          <StudentReport />
+          {this.state.selectedStudent.id ? (<StudentReport selectedStudent = {this.state.selectedStudent}/>) : null}
         </table>
       </div>
     );
